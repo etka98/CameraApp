@@ -8,18 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		502D2DC42BD70A9C00ACB5DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502D2DC32BD70A9C00ACB5DC /* AppDelegate.swift */; };
-		502D2DC82BD70A9C00ACB5DC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502D2DC72BD70A9C00ACB5DC /* ViewController.swift */; };
+		502D2DC82BD70A9C00ACB5DC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502D2DC72BD70A9C00ACB5DC /* MainViewController.swift */; };
 		502D2DCD2BD70A9E00ACB5DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 502D2DCC2BD70A9E00ACB5DC /* Assets.xcassets */; };
 		502D2DD02BD70A9E00ACB5DC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 502D2DCE2BD70A9E00ACB5DC /* LaunchScreen.storyboard */; };
+		502D2DDA2BD76DD900ACB5DC /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502D2DD92BD76DD900ACB5DC /* UIView+Extension.swift */; };
+		502D2DDC2BD7A09C00ACB5DC /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502D2DDB2BD7A09C00ACB5DC /* MainViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		502D2DC02BD70A9C00ACB5DC /* CameraApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CameraApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		502D2DC32BD70A9C00ACB5DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		502D2DC72BD70A9C00ACB5DC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		502D2DC72BD70A9C00ACB5DC /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		502D2DCC2BD70A9E00ACB5DC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		502D2DCF2BD70A9E00ACB5DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		502D2DD12BD70A9E00ACB5DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		502D2DD92BD76DD900ACB5DC /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		502D2DDB2BD7A09C00ACB5DC /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,12 +57,30 @@
 			isa = PBXGroup;
 			children = (
 				502D2DC32BD70A9C00ACB5DC /* AppDelegate.swift */,
-				502D2DC72BD70A9C00ACB5DC /* ViewController.swift */,
 				502D2DCC2BD70A9E00ACB5DC /* Assets.xcassets */,
-				502D2DCE2BD70A9E00ACB5DC /* LaunchScreen.storyboard */,
+				502D2DDD2BD7A9A000ACB5DC /* Extension */,
 				502D2DD12BD70A9E00ACB5DC /* Info.plist */,
+				502D2DCE2BD70A9E00ACB5DC /* LaunchScreen.storyboard */,
+				502D2DDE2BD7A9B300ACB5DC /* Main */,
 			);
 			path = CameraApp;
+			sourceTree = "<group>";
+		};
+		502D2DDD2BD7A9A000ACB5DC /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				502D2DD92BD76DD900ACB5DC /* UIView+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		502D2DDE2BD7A9B300ACB5DC /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				502D2DC72BD70A9C00ACB5DC /* MainViewController.swift */,
+				502D2DDB2BD7A09C00ACB5DC /* MainViewModel.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,7 +153,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				502D2DC82BD70A9C00ACB5DC /* ViewController.swift in Sources */,
+				502D2DC82BD70A9C00ACB5DC /* MainViewController.swift in Sources */,
+				502D2DDA2BD76DD900ACB5DC /* UIView+Extension.swift in Sources */,
+				502D2DDC2BD7A09C00ACB5DC /* MainViewModel.swift in Sources */,
 				502D2DC42BD70A9C00ACB5DC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,10 +303,10 @@
 				DEVELOPMENT_TEAM = 6PZ8CR2NH9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CameraApp/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -307,10 +331,10 @@
 				DEVELOPMENT_TEAM = 6PZ8CR2NH9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CameraApp/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

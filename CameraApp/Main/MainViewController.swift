@@ -126,7 +126,10 @@ private extension MainViewController {
     
     private func bindViewModel() {
         viewModel.stateChangeHandler = { [weak self] change in
-            guard let self else { return }
+            guard let self else {
+                return
+            }
+            
             self.applyStateChange(change)
         }
     }

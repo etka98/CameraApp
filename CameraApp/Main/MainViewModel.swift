@@ -105,7 +105,9 @@ class MainViewModel: NSObject {
         
         guard let captureDevice = captureDevice,
               let input = try? AVCaptureDeviceInput(device: captureDevice),
-              let output = photoOutput else { return }
+              let output = photoOutput else {
+            return
+        }
         
         setImageFormat()
         captureSession?.addInput(input)
@@ -131,6 +133,7 @@ extension MainViewModel: AVCapturePhotoCaptureDelegate {
             state.onChange?(.error(error))
             return
         }
+        
         lastImageData = imageData
         state.onChange?(.imageCaptured(imageData))
     }

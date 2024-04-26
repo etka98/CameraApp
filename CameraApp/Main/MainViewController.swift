@@ -75,6 +75,12 @@ extension MainViewController: CameraBottomDelegate {
         viewModel.stopCapture()
         setLastCapturedImage()
     }
+    
+    func cameraBottomView(_ view: CameraBottomView, galleryButtonTapped: UIButton) {
+        let galleryViewController = GalleryViewController()
+        navigationController?.pushViewController(galleryViewController, animated: true)
+        // TODO: BUG IS HERE
+    }
 }
 
 // MARK: Private - Setup
@@ -142,10 +148,12 @@ private extension MainViewController {
             // TODO: Handle camera warning
             break
         case .imageCaptured(let imageData):
-            guard let image = UIImage(data: imageData) else {
-                return
+            DispatchQueue.global(qos: .background).async {
+                guard let image = UIImage(data: imageData) else {
+                    return
+                }
+                image.saveToLocalStorage()
             }
-            image.saveToLocalStorageInBackground()
         case .error(let error):
             // TODO: Handle error
             break

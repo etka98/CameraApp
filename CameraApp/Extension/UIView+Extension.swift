@@ -18,12 +18,12 @@ extension UIView {
         ])
     }
     
-    func dock(subview: UILayoutGuide, margins: UIEdgeInsets = .zero) {
+    func dock(superview: UILayoutGuide, margins: UIEdgeInsets = .zero) {
         NSLayoutConstraint.activate([
-            leadingAnchor.constraint(equalTo: subview.leadingAnchor, constant: margins.left),
-            topAnchor.constraint(equalTo: subview.topAnchor, constant: margins.top),
-            subview.trailingAnchor.constraint(equalTo: trailingAnchor, constant: margins.right),
-            subview.bottomAnchor.constraint(equalTo: bottomAnchor, constant: margins.bottom)
+            leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: margins.left),
+            topAnchor.constraint(equalTo: superview.topAnchor, constant: margins.top),
+            superview.trailingAnchor.constraint(equalTo: trailingAnchor, constant: margins.right),
+            superview.bottomAnchor.constraint(equalTo: bottomAnchor, constant: margins.bottom)
         ])
     }
     

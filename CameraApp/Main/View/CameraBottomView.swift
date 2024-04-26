@@ -14,6 +14,12 @@ protocol CameraBottomDelegate: AnyObject {
     ///     - view: Delegate owner.
     ///     - shouldStartRecording: Boolean value indicating whether recording should start.
     func cameraBottomView(_ view: CameraBottomView, shouldStartRecording: Bool)
+    
+    /// Notfies whether gallery button tapped.
+    ///  - Parameters:
+    ///     - view: Delegate owner.
+    ///     - galleryButtonTapped: Tapped button.
+    func cameraBottomView(_ view: CameraBottomView, galleryButtonTapped: UIButton)
 }
 
 class CameraBottomView: UIView {
@@ -130,7 +136,7 @@ private extension CameraBottomView {
     
     @objc
     private func galleryButtonTapped() {
-        // TODO: Notify delegate
+        delegate?.cameraBottomView(self, galleryButtonTapped: galleryButton)
     }
 }
 

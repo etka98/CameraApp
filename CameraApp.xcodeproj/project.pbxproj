@@ -14,6 +14,9 @@
 		502D2DDA2BD76DD900ACB5DC /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502D2DD92BD76DD900ACB5DC /* UIView+Extension.swift */; };
 		502D2DDC2BD7A09C00ACB5DC /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502D2DDB2BD7A09C00ACB5DC /* MainViewModel.swift */; };
 		502D996F2BD981E800665F9D /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502D996E2BD981E800665F9D /* UIImage+Extension.swift */; };
+		502D99722BD99F7C00665F9D /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502D99712BD99F7C00665F9D /* GalleryViewController.swift */; };
+		502D99742BD99FBE00665F9D /* GalleryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502D99732BD99FBE00665F9D /* GalleryViewModel.swift */; };
+		502D99772BD9A36D00665F9D /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502D99762BD9A36D00665F9D /* GalleryCollectionViewCell.swift */; };
 		508F07E72BD7D871002B3DC7 /* CameraBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508F07E62BD7D871002B3DC7 /* CameraBottomView.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +30,9 @@
 		502D2DD92BD76DD900ACB5DC /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		502D2DDB2BD7A09C00ACB5DC /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		502D996E2BD981E800665F9D /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		502D99712BD99F7C00665F9D /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
+		502D99732BD99FBE00665F9D /* GalleryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewModel.swift; sourceTree = "<group>"; };
+		502D99762BD9A36D00665F9D /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		508F07E62BD7D871002B3DC7 /* CameraBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraBottomView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,10 +66,10 @@
 		502D2DC22BD70A9C00ACB5DC /* CameraApp */ = {
 			isa = PBXGroup;
 			children = (
-				508F07E52BD7D853002B3DC7 /* View */,
 				502D2DC32BD70A9C00ACB5DC /* AppDelegate.swift */,
 				502D2DCC2BD70A9E00ACB5DC /* Assets.xcassets */,
 				502D2DDD2BD7A9A000ACB5DC /* Extension */,
+				502D99702BD99F4100665F9D /* Gallery */,
 				502D2DD12BD70A9E00ACB5DC /* Info.plist */,
 				502D2DCE2BD70A9E00ACB5DC /* LaunchScreen.storyboard */,
 				502D2DDE2BD7A9B300ACB5DC /* Main */,
@@ -85,8 +91,27 @@
 			children = (
 				502D2DC72BD70A9C00ACB5DC /* MainViewController.swift */,
 				502D2DDB2BD7A09C00ACB5DC /* MainViewModel.swift */,
+				508F07E52BD7D853002B3DC7 /* View */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		502D99702BD99F4100665F9D /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				502D99712BD99F7C00665F9D /* GalleryViewController.swift */,
+				502D99732BD99FBE00665F9D /* GalleryViewModel.swift */,
+				502D99752BD9A33A00665F9D /* View */,
+			);
+			path = Gallery;
+			sourceTree = "<group>";
+		};
+		502D99752BD9A33A00665F9D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				502D99762BD9A36D00665F9D /* GalleryCollectionViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		508F07E52BD7D853002B3DC7 /* View */ = {
@@ -168,10 +193,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				502D2DC82BD70A9C00ACB5DC /* MainViewController.swift in Sources */,
+				502D99722BD99F7C00665F9D /* GalleryViewController.swift in Sources */,
 				508F07E72BD7D871002B3DC7 /* CameraBottomView.swift in Sources */,
 				502D2DDA2BD76DD900ACB5DC /* UIView+Extension.swift in Sources */,
 				502D996F2BD981E800665F9D /* UIImage+Extension.swift in Sources */,
+				502D99742BD99FBE00665F9D /* GalleryViewModel.swift in Sources */,
 				502D2DDC2BD7A09C00ACB5DC /* MainViewModel.swift in Sources */,
+				502D99772BD9A36D00665F9D /* GalleryCollectionViewCell.swift in Sources */,
 				502D2DC42BD70A9C00ACB5DC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

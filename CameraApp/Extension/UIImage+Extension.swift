@@ -9,18 +9,8 @@ import UIKit
 
 extension UIImage {
     
-    /// Saves image.data to local storage in background thread.
-    func saveToLocalStorageInBackground() {
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            guard let self else {
-                return
-            }
-            self.saveToLocalStorage()
-        }
-    }
-    
     @discardableResult
-    private func saveToLocalStorage(compressionQuality: CGFloat = 1.0, fileExtension: String = "jpg") -> Bool {
+    func saveToLocalStorage(compressionQuality: CGFloat = 1.0, fileExtension: String = "jpg") -> Bool {
         guard let imageData = jpegData(compressionQuality: compressionQuality) else {
             return false
         }

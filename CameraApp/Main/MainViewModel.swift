@@ -27,6 +27,7 @@ class MainViewModel: NSObject {
         
         static let timeInterval = 0.2
         static let targetResolution: Int32 = 4000 * 3000
+        static let preferredTimescale: CMTimeScale = 1000000
     }
     
     /// Data representing last captured image.
@@ -34,6 +35,9 @@ class MainViewModel: NSObject {
     
     /// Capture session.
     var captureSession: AVCaptureSession?
+    
+    /// Capture Device
+    var captureDevice: AVCaptureDevice?
     
     /// Closure for given state
     var stateChangeHandler: ((MainViewState.Change) -> Void)? {
@@ -43,7 +47,6 @@ class MainViewModel: NSObject {
     
     private let state = MainViewState()
     private var photoOutput: AVCapturePhotoOutput?
-    private var captureDevice: AVCaptureDevice?
     private var cameraTimer: Timer?
     private var cameraAuthorizationStatus: AVAuthorizationStatus {
         return AVCaptureDevice.authorizationStatus(for: .video)
@@ -81,16 +84,26 @@ class MainViewModel: NSObject {
     /// Starts timer to capture image periodically.
     func startCapture() {
         cameraTimer?.invalidate()
-        cameraTimer = Timer.scheduledTimer(timeInterval: Constant.timeInterval,
-                                           target: self, 
-                                           selector: #selector(captureImage),
-                                           userInfo: nil,
-                                           repeats: true)
+        cameraTimer = Timer.scheduledTimer(
+            timeInterval: Constant.timeInterval,
+            target: self,
+            selector: #selector(captureImage),
+            userInfo: nil,
+            repeats: true)
     }
     
     /// Stops image capture timer.
     func stopCapture() {
         cameraTimer?.invalidate()
+    }
+    
+    /// Sets iso and shutter speed.
+    func setIsoAndShutterSpeed(iso: Float, exposureDuration: Float) {
+        try? captureDevice?.lockForConfiguration()
+        captureDevice?.setExposureModeCustom(
+            duration: CMTime(seconds: Double(exposureDuration), preferredTimescale: Constant.preferredTimescale),
+            iso: iso)
+        captureDevice?.unlockForConfiguration()
     }
     
     @objc private func captureImage() {

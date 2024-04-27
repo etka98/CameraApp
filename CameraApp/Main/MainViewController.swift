@@ -47,6 +47,21 @@ class MainViewController: UIViewController {
         return imageView
     }()
     
+    private lazy var settingsViewController: SettingsViewController = {
+        let viewController = SettingsViewController()
+        viewController.delegate = self
+        let activeFormat = viewModel.captureDevice?.activeFormat
+        viewController.configure(
+            minISO: activeFormat?.minISO,
+            maxISO: activeFormat?.maxISO,
+            minExposureDuration: activeFormat?.minExposureDuration.seconds,
+            maxExposureDuration: activeFormat?.maxExposureDuration.seconds,
+            currentISO: viewModel.captureDevice?.iso,
+            currentExposureDuration: viewModel.captureDevice?.exposureDuration.seconds)
+        
+        return viewController
+    }()
+    
     private let viewModel = MainViewModel()
     
     override func viewDidLoad() {
@@ -87,6 +102,29 @@ extension MainViewController: CameraBottomDelegate {
     func cameraBottomView(_ view: CameraBottomView, galleryButtonTapped: UIButton) {
         let galleryViewController = GalleryViewController()
         navigationController?.pushViewController(galleryViewController, animated: true)
+    }
+    
+    func cameraBottomView(_ view: CameraBottomView, settingsButtonTapped: UIButton) {
+        guard let sheet = settingsViewController.sheetPresentationController else {
+            return
+        }
+        
+        sheet.detents = [.medium()]
+        sheet.largestUndimmedDetentIdentifier = .medium
+        sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+        sheet.prefersEdgeAttachedInCompactHeight = true
+        sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
+        
+        present(settingsViewController, animated: true, completion: nil)
+    }
+}
+
+// MARK: SettingsViewDelegate
+
+extension MainViewController: SettingsViewDelegate {
+    
+    func settingViewContoller(_ view: SettingsViewController, iso: Float, exposureDuration: Float) {
+        viewModel.setIsoAndShutterSpeed(iso: iso, exposureDuration: exposureDuration)
     }
 }
 

@@ -42,6 +42,7 @@ final class GalleryViewController: BaseViewController {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .clear
         collectionView.register(
             GalleryCollectionViewCell.self,
             forCellWithReuseIdentifier: GalleryCollectionViewCell.identifier)

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PresentImageViewController: UIViewController {
+final class PresentImageViewController: UIViewController {
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()

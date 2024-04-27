@@ -18,7 +18,7 @@ protocol SettingsViewDelegate: AnyObject {
     func settingViewContoller(_ view: SettingsViewController, iso: Float, exposureDuration: Float)
 }
 
-class SettingsViewController: UIViewController {
+final class SettingsViewController: BaseViewController {
     
     weak var delegate: SettingsViewDelegate?
     

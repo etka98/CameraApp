@@ -20,6 +20,7 @@
 		507037F42BDBF718000460F4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507037F32BDBF718000460F4 /* SettingsViewController.swift */; };
 		507037F92BDBF8DE000460F4 /* SliderWithLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507037F82BDBF8DE000460F4 /* SliderWithLabelView.swift */; };
 		507037FB2BDCD3A3000460F4 /* PresentImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507037FA2BDCD3A3000460F4 /* PresentImageViewController.swift */; };
+		507037FE2BDD9A36000460F4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507037FD2BDD9A36000460F4 /* BaseViewController.swift */; };
 		508F07E72BD7D871002B3DC7 /* CameraBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508F07E62BD7D871002B3DC7 /* CameraBottomView.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		507037F32BDBF718000460F4 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		507037F82BDBF8DE000460F4 /* SliderWithLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderWithLabelView.swift; sourceTree = "<group>"; };
 		507037FA2BDCD3A3000460F4 /* PresentImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentImageViewController.swift; sourceTree = "<group>"; };
+		507037FD2BDD9A36000460F4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		508F07E62BD7D871002B3DC7 /* CameraBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraBottomView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,6 +77,7 @@
 				502D2DD12BD70A9E00ACB5DC /* Info.plist */,
 				502D2DC32BD70A9C00ACB5DC /* AppDelegate.swift */,
 				502D2DCC2BD70A9E00ACB5DC /* Assets.xcassets */,
+				507037FC2BDD9A00000460F4 /* Base */,
 				502D2DDD2BD7A9A000ACB5DC /* Extension */,
 				502D99702BD99F4100665F9D /* Gallery */,
 				502D2DCE2BD70A9E00ACB5DC /* LaunchScreen.storyboard */,
@@ -137,6 +140,14 @@
 				507037F82BDBF8DE000460F4 /* SliderWithLabelView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		507037FC2BDD9A00000460F4 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				507037FD2BDD9A36000460F4 /* BaseViewController.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		508F07E52BD7D853002B3DC7 /* View */ = {
@@ -217,6 +228,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				507037FE2BDD9A36000460F4 /* BaseViewController.swift in Sources */,
 				502D2DC82BD70A9C00ACB5DC /* MainViewController.swift in Sources */,
 				502D99722BD99F7C00665F9D /* GalleryViewController.swift in Sources */,
 				507037FB2BDCD3A3000460F4 /* PresentImageViewController.swift in Sources */,

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class GalleryViewController: UIViewController {
+final class GalleryViewController: BaseViewController {
     
     private enum Constant {
         
@@ -218,8 +218,7 @@ private extension GalleryViewController {
         case .retrievedImageURLs:
             collectionView.reloadData()
         case .error(let error):
-            // TODO: Handle error
-            break
+            createAlertForError(message: error?.localizedDescription)
         }
     }
 }

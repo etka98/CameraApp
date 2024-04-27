@@ -8,13 +8,19 @@
 import UIKit
 import AVFoundation
 
-class MainViewController: UIViewController {
+final class MainViewController: BaseViewController {
     
     private enum Constant {
         
         static let radius = 8.0
         static let borderWidth = 2.0
         static let imagePreviewWidthRatio = 0.7
+    }
+    
+    // TODO: Localization
+    private enum Localization {
+        
+        static let noCameraAccessMessage = "No Camera Access"
     }
     
     private lazy var videoPreviewLayer: AVCaptureVideoPreviewLayer = {
@@ -188,20 +194,25 @@ private extension MainViewController {
     private func applyStateChange(_ change: MainViewState.Change) {
         switch change {
         case .authorizedCamera:
-            view.layer.insertSublayer(videoPreviewLayer, at: .zero)
+            DispatchQueue.main.async { [weak  self] in
+                guard let self else {
+                    return
+                }
+                
+                self.view.layer.insertSublayer(self.videoPreviewLayer, at: .zero)
+            }
         case .noCameraAccess:
-            // TODO: Handle camera warning
-            break
+            createAlertForError(message: Localization.noCameraAccessMessage)
         case .imageCaptured(let imageData):
             DispatchQueue.global(qos: .background).async {
                 guard let image = UIImage(data: imageData) else {
                     return
                 }
+                
                 image.saveToLocalStorage()
             }
         case .error(let error):
-            // TODO: Handle error
-            break
+            createAlertForError(message: error?.localizedDescription)
         }
     }
 }

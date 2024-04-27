@@ -21,7 +21,7 @@ final class MainViewState {
     var onChange: ((MainViewState.Change) -> Void)?
 }
 
-class MainViewModel: NSObject {
+final class MainViewModel: NSObject {
     
     private enum Constant {
         

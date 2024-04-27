@@ -56,6 +56,14 @@ class MainViewController: UIViewController {
         setup()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        bottomView.stopRecording()
+        toggleLastImageView(isHidden: false)
+        viewModel.stopCapture()
+        setLastCapturedImage()
+        super.viewWillDisappear(animated)
+    }
+    
     deinit {
         viewModel.stopCamera()
     }
@@ -79,7 +87,6 @@ extension MainViewController: CameraBottomDelegate {
     func cameraBottomView(_ view: CameraBottomView, galleryButtonTapped: UIButton) {
         let galleryViewController = GalleryViewController()
         navigationController?.pushViewController(galleryViewController, animated: true)
-        // TODO: BUG IS HERE
     }
 }
 

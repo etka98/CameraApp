@@ -70,7 +70,16 @@ final class GalleryViewController: UIViewController {
 // MARK: UICollectionViewDelegate
 
 extension GalleryViewController: UICollectionViewDelegate {
-    // TODO: Present image when clicked
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard !viewModel.isEditing else {
+            return
+        }
+        
+        let viewController = PresentImageViewController()
+        viewController.configure(url: viewModel.imageURLs[indexPath.item].path)
+        present(viewController, animated: true)
+    }
 }
 
 // MARK: UICollectionViewDataSource

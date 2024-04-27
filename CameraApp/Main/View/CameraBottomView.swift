@@ -20,6 +20,12 @@ protocol CameraBottomDelegate: AnyObject {
     ///     - view: Delegate owner.
     ///     - galleryButtonTapped: Tapped button.
     func cameraBottomView(_ view: CameraBottomView, galleryButtonTapped: UIButton)
+    
+    /// Notfies whether settings button tapped.
+    ///  - Parameters:
+    ///     - view: Delegate owner.
+    ///     - settingsButtonTapped: Tapped button.
+    func cameraBottomView(_ view: CameraBottomView, settingsButtonTapped: UIButton)
 }
 
 class CameraBottomView: UIView {
@@ -141,7 +147,7 @@ private extension CameraBottomView {
     
     @objc
     private func settingsButtonTapped() {
-        // TODO: Notify delegate
+        delegate?.cameraBottomView(self, settingsButtonTapped: settingsButton)
     }
     
     @objc

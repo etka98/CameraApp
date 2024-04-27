@@ -19,6 +19,7 @@
 		502D99772BD9A36D00665F9D /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502D99762BD9A36D00665F9D /* GalleryCollectionViewCell.swift */; };
 		507037F42BDBF718000460F4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507037F32BDBF718000460F4 /* SettingsViewController.swift */; };
 		507037F92BDBF8DE000460F4 /* SliderWithLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507037F82BDBF8DE000460F4 /* SliderWithLabelView.swift */; };
+		507037FB2BDCD3A3000460F4 /* PresentImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507037FA2BDCD3A3000460F4 /* PresentImageViewController.swift */; };
 		508F07E72BD7D871002B3DC7 /* CameraBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508F07E62BD7D871002B3DC7 /* CameraBottomView.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		502D99762BD9A36D00665F9D /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		507037F32BDBF718000460F4 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		507037F82BDBF8DE000460F4 /* SliderWithLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderWithLabelView.swift; sourceTree = "<group>"; };
+		507037FA2BDCD3A3000460F4 /* PresentImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentImageViewController.swift; sourceTree = "<group>"; };
 		508F07E62BD7D871002B3DC7 /* CameraBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraBottomView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,11 +72,11 @@
 		502D2DC22BD70A9C00ACB5DC /* CameraApp */ = {
 			isa = PBXGroup;
 			children = (
+				502D2DD12BD70A9E00ACB5DC /* Info.plist */,
 				502D2DC32BD70A9C00ACB5DC /* AppDelegate.swift */,
 				502D2DCC2BD70A9E00ACB5DC /* Assets.xcassets */,
 				502D2DDD2BD7A9A000ACB5DC /* Extension */,
 				502D99702BD99F4100665F9D /* Gallery */,
-				502D2DD12BD70A9E00ACB5DC /* Info.plist */,
 				502D2DCE2BD70A9E00ACB5DC /* LaunchScreen.storyboard */,
 				502D2DDE2BD7A9B300ACB5DC /* Main */,
 				507037F22BDBF6FB000460F4 /* Settings */,
@@ -107,6 +109,7 @@
 			children = (
 				502D99712BD99F7C00665F9D /* GalleryViewController.swift */,
 				502D99732BD99FBE00665F9D /* GalleryViewModel.swift */,
+				507037FA2BDCD3A3000460F4 /* PresentImageViewController.swift */,
 				502D99752BD9A33A00665F9D /* View */,
 			);
 			path = Gallery;
@@ -216,6 +219,7 @@
 			files = (
 				502D2DC82BD70A9C00ACB5DC /* MainViewController.swift in Sources */,
 				502D99722BD99F7C00665F9D /* GalleryViewController.swift in Sources */,
+				507037FB2BDCD3A3000460F4 /* PresentImageViewController.swift in Sources */,
 				508F07E72BD7D871002B3DC7 /* CameraBottomView.swift in Sources */,
 				507037F42BDBF718000460F4 /* SettingsViewController.swift in Sources */,
 				502D2DDA2BD76DD900ACB5DC /* UIView+Extension.swift in Sources */,

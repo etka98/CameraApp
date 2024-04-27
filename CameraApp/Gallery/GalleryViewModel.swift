@@ -23,9 +23,6 @@ final class GalleryViewModel {
     /// Boolean value indicating whether currently in editing state.
     var isEditing = false
     
-    /// List of urls of the stored image data.
-    var imageURLs: [URL] = []
-    
     /// Closure for given state.
     var stateChangeHandler: ((GalleryViewState.Change) -> Void)? {
         get { state.onChange }
@@ -37,25 +34,20 @@ final class GalleryViewModel {
         static let sizeUnits = ["KB", "MB", "GB", "TB"]
         static let sizeFormat = "%.2f %@"
         static let defaultUnit = "Byte"
+        static let unitSize = 1000.0
     }
     
     private let state = GalleryViewState()
     
     /// Fetches images from local data storage.
     func loadImages() {
-        guard let documentsDirectory = FileManager.default.urls(
-            for: .documentDirectory,
-            in: .userDomainMask).first else {
-            return
-        }
-        do {
-            let fileURLs = try FileManager.default.contentsOfDirectory(
-                at: documentsDirectory,
-                includingPropertiesForKeys: nil)
-            imageURLs = fileURLs
+        StoredImageManager.shared.loadImages { error in
+            if let error {
+                state.onChange?(.error(error))
+                return
+            }
+            
             state.onChange?(.retrievedImageURLs)
-        } catch {
-            state.onChange?(.error(error))
         }
     }
     
@@ -63,37 +55,32 @@ final class GalleryViewModel {
     ///  - Parameters:
     ///     - index: Integer value indicating index of item.
     func deleteImage(at index: Int) {
-        let fileURL = imageURLs[index]
-        if FileManager.default.fileExists(atPath: fileURL.path) {
-            do {
-                try FileManager.default.removeItem(at: fileURL)
-            } catch {
-                state.onChange?(.error(error))
-            }
+        if let error = StoredImageManager.shared.deleteImage(at: index) {
+            state.onChange?(.error(error))
         }
     }
     
     /// Calculates total size of the stored images.
     ///  - Returns: Formated file size.
     func calculateSizeOfFile() -> String {
-        var totalFileSize = 0.0
+        var totalFileSize = StoredImageManager.shared.calculateSizeOfFile()
         var sizeUnit = Constant.defaultUnit
-        for url in imageURLs {
-            let attributes = try? FileManager.default.attributesOfItem(atPath: url.path)
-            if let attributes = attributes, 
-                let fileSize = attributes[.size] as? NSNumber {
-                totalFileSize += fileSize.doubleValue
-            }
-        }
         
         for unit in Constant.sizeUnits {
-            guard totalFileSize > 1000.0 else {
+            guard totalFileSize > Constant.unitSize else {
                 break
             }
-            totalFileSize /= 1000.0
+            totalFileSize /= Constant.unitSize
             sizeUnit = unit
         }
         
         return String(format: Constant.sizeFormat, totalFileSize, sizeUnit)
+    }
+    
+    /// Deletes all images from local data storage.
+    func deleteAllImages() {
+        if let error = StoredImageManager.shared.deleteAllImages() {
+            state.onChange?(.error(error))
+        }
     }
 }

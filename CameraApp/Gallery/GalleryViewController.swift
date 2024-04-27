@@ -15,6 +15,9 @@ final class GalleryViewController: BaseViewController {
         static let rowSize = 3.0
         static let rowSpacing = (rowSize - 1) * itemSpacing
         static let editButtonIndex = 1
+        static let cornerRadius = 12.0
+        static let buttonMargins = UIEdgeInsets(top: 12, left: 12, bottom: 0, right: 12)
+        static let buttonHeight = 50.0
     }
     
     // TODO: Localization
@@ -27,6 +30,7 @@ final class GalleryViewController: BaseViewController {
         static let infoMessage = "Capture Size: %@ \n Image Count: %d"
         static let infoTitle = "Information"
         static let okayButtonTitle = "OK"
+        static let completeButtonTitle = "Complete"
     }
     
     private lazy var collectionView: UICollectionView = {
@@ -45,6 +49,17 @@ final class GalleryViewController: BaseViewController {
         collectionView.delegate = self
         
         return collectionView
+    }()
+    
+    private lazy var completeButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle(Localization.completeButtonTitle, for: .normal)
+        button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = Constant.cornerRadius
+        button.addTarget(self, action: #selector(completeButtonTapped), for: .touchUpInside)
+        
+        return button
     }()
     
     private lazy var deleteBarButtonItem = UIBarButtonItem(
@@ -77,7 +92,7 @@ extension GalleryViewController: UICollectionViewDelegate {
         }
         
         let viewController = PresentImageViewController()
-        viewController.configure(url: viewModel.imageURLs[indexPath.item].path)
+        viewController.configure(url: StoredImageManager.shared.imageURLs[indexPath.item].path)
         present(viewController, animated: true)
     }
 }
@@ -87,7 +102,7 @@ extension GalleryViewController: UICollectionViewDelegate {
 extension GalleryViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.imageURLs.count
+        StoredImageManager.shared.imageURLs.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -98,7 +113,7 @@ extension GalleryViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        let image = UIImage(contentsOfFile: viewModel.imageURLs[indexPath.item].path)
+        let image = UIImage(contentsOfFile: StoredImageManager.shared.imageURLs[indexPath.item].path)
         cell.configure(image: image, isEditing: viewModel.isEditing)
         
         return cell
@@ -130,8 +145,18 @@ private extension GalleryViewController {
     
     private func setupConstraints() {
         view.addSubview(collectionView)
+        view.addSubview(completeButton)
         
-        collectionView.dock(superview: view.safeAreaLayoutGuide)
+        completeButton.set(width: nil, height: Constant.buttonHeight)
+        NSLayoutConstraint.activate([
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            view.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor),
+            completeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constant.buttonMargins.left),
+            completeButton.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: Constant.buttonMargins.top),
+            view.trailingAnchor.constraint(equalTo: completeButton.trailingAnchor, constant: Constant.buttonMargins.right),
+            view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: completeButton.bottomAnchor)
+        ])
     }
 }
 
@@ -157,7 +182,7 @@ private extension GalleryViewController {
         
         for indexPath in sortedIndexPaths {
             viewModel.deleteImage(at: indexPath.item)
-            viewModel.imageURLs.remove(at: indexPath.item)
+            StoredImageManager.shared.imageURLs.remove(at: indexPath.item)
         }
         
         collectionView.performBatchUpdates {
@@ -170,7 +195,7 @@ private extension GalleryViewController {
         let message = String(
             format: Localization.infoMessage,
             viewModel.calculateSizeOfFile(),
-            viewModel.imageURLs.count)
+            StoredImageManager.shared.imageURLs.count)
         let alert = UIAlertController(
             title: Localization.infoTitle,
             message: message,
@@ -179,6 +204,12 @@ private extension GalleryViewController {
         alert.addAction(UIAlertAction(title: Localization.okayButtonTitle, style: .cancel))
     
         present(alert, animated: true)
+    }
+    
+    @objc
+    private func completeButtonTapped() {
+        viewModel.deleteAllImages()
+        navigationController?.popViewController(animated: true)
     }
 }
 

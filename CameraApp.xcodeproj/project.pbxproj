@@ -21,6 +21,7 @@
 		507037F92BDBF8DE000460F4 /* SliderWithLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507037F82BDBF8DE000460F4 /* SliderWithLabelView.swift */; };
 		507037FB2BDCD3A3000460F4 /* PresentImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507037FA2BDCD3A3000460F4 /* PresentImageViewController.swift */; };
 		507037FE2BDD9A36000460F4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507037FD2BDD9A36000460F4 /* BaseViewController.swift */; };
+		507038002BDDA18D000460F4 /* StoredImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507037FF2BDDA18D000460F4 /* StoredImageManager.swift */; };
 		508F07E72BD7D871002B3DC7 /* CameraBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508F07E62BD7D871002B3DC7 /* CameraBottomView.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		507037F82BDBF8DE000460F4 /* SliderWithLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderWithLabelView.swift; sourceTree = "<group>"; };
 		507037FA2BDCD3A3000460F4 /* PresentImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentImageViewController.swift; sourceTree = "<group>"; };
 		507037FD2BDD9A36000460F4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		507037FF2BDDA18D000460F4 /* StoredImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredImageManager.swift; sourceTree = "<group>"; };
 		508F07E62BD7D871002B3DC7 /* CameraBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraBottomView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -146,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				507037FD2BDD9A36000460F4 /* BaseViewController.swift */,
+				507037FF2BDDA18D000460F4 /* StoredImageManager.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 			files = (
 				507037FE2BDD9A36000460F4 /* BaseViewController.swift in Sources */,
 				502D2DC82BD70A9C00ACB5DC /* MainViewController.swift in Sources */,
+				507038002BDDA18D000460F4 /* StoredImageManager.swift in Sources */,
 				502D99722BD99F7C00665F9D /* GalleryViewController.swift in Sources */,
 				507037FB2BDCD3A3000460F4 /* PresentImageViewController.swift in Sources */,
 				508F07E72BD7D871002B3DC7 /* CameraBottomView.swift in Sources */,

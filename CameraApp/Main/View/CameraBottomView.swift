@@ -28,7 +28,7 @@ protocol CameraBottomDelegate: AnyObject {
     func cameraBottomView(_ view: CameraBottomView, settingsButtonTapped: UIButton)
 }
 
-class CameraBottomView: UIView {
+final class CameraBottomView: UIView {
     
     weak var delegate: CameraBottomDelegate?
     

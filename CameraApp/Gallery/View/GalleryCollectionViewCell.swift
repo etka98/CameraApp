@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GalleryCollectionViewCell: UICollectionViewCell {
+final class GalleryCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "GalleryCollectionViewCell"
     

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SliderWithLabelView: UIStackView {
+final class SliderWithLabelView: UIStackView {
     
     private enum Constant {
         

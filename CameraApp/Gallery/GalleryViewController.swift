@@ -14,6 +14,7 @@ final class GalleryViewController: UIViewController {
         static let itemSpacing = 5.0
         static let rowSize = 3.0
         static let rowSpacing = (rowSize - 1) * itemSpacing
+        static let editButtonIndex = 1
     }
     
     // TODO: Localization
@@ -177,7 +178,7 @@ private extension GalleryViewController {
 private extension GalleryViewController {
     
     private func adjustNavigationRightButtons() {
-        navigationItem.rightBarButtonItem?.title = !viewModel.isEditing 
+        navigationItem.rightBarButtonItems?[Constant.editButtonIndex].title = !viewModel.isEditing
         ? Localization.editButtonTitle
         : Localization.doneButtonTitle
         

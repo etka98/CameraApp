@@ -41,6 +41,7 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
         label.layer.borderWidth = Constant.borderWidth
         label.layer.borderColor = UIColor.white.cgColor
         label.backgroundColor = .black.withAlphaComponent(Constant.alpha)
+        label.textColor = .white
         
         return label
     }()

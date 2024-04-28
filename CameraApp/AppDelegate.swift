@@ -25,9 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        // When app is killed durring session or quickly after session this code runs before
-        // all images are saved which results in not deleted images.
-        // Needs investigation.
         StoredImageManager.shared.deleteAllImages()
     }
 }

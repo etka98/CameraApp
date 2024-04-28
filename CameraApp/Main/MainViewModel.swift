@@ -39,6 +39,9 @@ final class MainViewModel: NSObject {
     /// Capture Device
     var captureDevice: AVCaptureDevice?
     
+    /// Elapsed time of the capture session.
+    var elapsedTime: Double = .zero
+    
     /// Closure for given state
     var stateChangeHandler: ((MainViewState.Change) -> Void)? {
         get { state.onChange }
@@ -51,6 +54,8 @@ final class MainViewModel: NSObject {
     private var cameraAuthorizationStatus: AVAuthorizationStatus {
         return AVCaptureDevice.authorizationStatus(for: .video)
     }
+    private var startTime: Date?
+    private var pauseTime: Date?
     
     /// Checks for camera authrization status.
     func setupCamera() {
@@ -83,6 +88,7 @@ final class MainViewModel: NSObject {
     
     /// Starts timer to capture image periodically.
     func startCapture() {
+        startTime = Date()
         cameraTimer?.invalidate()
         cameraTimer = Timer.scheduledTimer(
             timeInterval: Constant.timeInterval,
@@ -94,6 +100,8 @@ final class MainViewModel: NSObject {
     
     /// Stops image capture timer.
     func stopCapture() {
+        pauseTime = Date()
+        updateElapsedTime()
         cameraTimer?.invalidate()
     }
     
@@ -186,5 +194,9 @@ private extension MainViewModel {
         }
         
         return selectedFormat
+    }
+    
+    private func updateElapsedTime() {
+        elapsedTime += pauseTime?.timeIntervalSince(startTime ?? Date()) ?? .zero
     }
 }

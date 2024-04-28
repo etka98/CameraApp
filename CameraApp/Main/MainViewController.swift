@@ -77,14 +77,6 @@ final class MainViewController: BaseViewController {
         setup()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        bottomView.stopRecording()
-        toggleLastImageView(isHidden: false)
-        viewModel.stopCapture()
-        setLastCapturedImage()
-        super.viewWillDisappear(animated)
-    }
-    
     deinit {
         viewModel.stopCamera()
     }
@@ -106,7 +98,13 @@ extension MainViewController: CameraBottomDelegate {
     }
     
     func cameraBottomView(_ view: CameraBottomView, galleryButtonTapped: UIButton) {
+        pauseSession()
+        
         let galleryViewController = GalleryViewController()
+        let galleryViewModel = GalleryViewModel()
+        galleryViewModel.elapsedTime = viewModel.elapsedTime
+        galleryViewController.viewModel = galleryViewModel
+        galleryViewController.delegate = self
         navigationController?.pushViewController(galleryViewController, animated: true)
     }
     
@@ -131,6 +129,15 @@ extension MainViewController: SettingsViewDelegate {
     
     func settingViewContoller(_ view: SettingsViewController, iso: Float, exposureDuration: Float) {
         viewModel.setIsoAndShutterSpeed(iso: iso, exposureDuration: exposureDuration)
+    }
+}
+
+// MARK: GalleryViewControllerDelegate
+
+extension MainViewController: GalleryViewControllerDelegate {
+    
+    func galleryViewController(_ viewController: GalleryViewController, didCompleteSession: Bool) {
+        viewModel.elapsedTime = .zero
     }
 }
 
@@ -174,6 +181,15 @@ private extension MainViewController {
     
     private func toggleLastImageView(isHidden: Bool) {
         lastImageView.isHidden = isHidden
+    }
+    
+    private func pauseSession() {
+        if bottomView.isRecording {
+            viewModel.stopCapture()
+        }
+        bottomView.stopRecording()
+        toggleLastImageView(isHidden: false)
+        setLastCapturedImage()
     }
 }
 

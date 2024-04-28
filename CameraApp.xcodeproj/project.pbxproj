@@ -22,6 +22,7 @@
 		507037FB2BDCD3A3000460F4 /* PresentImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507037FA2BDCD3A3000460F4 /* PresentImageViewController.swift */; };
 		507037FE2BDD9A36000460F4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507037FD2BDD9A36000460F4 /* BaseViewController.swift */; };
 		507038002BDDA18D000460F4 /* StoredImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507037FF2BDDA18D000460F4 /* StoredImageManager.swift */; };
+		507038022BDE670A000460F4 /* GalleryEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507038012BDE670A000460F4 /* GalleryEmptyView.swift */; };
 		508F07E72BD7D871002B3DC7 /* CameraBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508F07E62BD7D871002B3DC7 /* CameraBottomView.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 		507037FA2BDCD3A3000460F4 /* PresentImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentImageViewController.swift; sourceTree = "<group>"; };
 		507037FD2BDD9A36000460F4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		507037FF2BDDA18D000460F4 /* StoredImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredImageManager.swift; sourceTree = "<group>"; };
+		507038012BDE670A000460F4 /* GalleryEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryEmptyView.swift; sourceTree = "<group>"; };
 		508F07E62BD7D871002B3DC7 /* CameraBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraBottomView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				502D99762BD9A36D00665F9D /* GalleryCollectionViewCell.swift */,
+				507038012BDE670A000460F4 /* GalleryEmptyView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 				507037FB2BDCD3A3000460F4 /* PresentImageViewController.swift in Sources */,
 				508F07E72BD7D871002B3DC7 /* CameraBottomView.swift in Sources */,
 				507037F42BDBF718000460F4 /* SettingsViewController.swift in Sources */,
+				507038022BDE670A000460F4 /* GalleryEmptyView.swift in Sources */,
 				502D2DDA2BD76DD900ACB5DC /* UIView+Extension.swift in Sources */,
 				502D996F2BD981E800665F9D /* UIImage+Extension.swift in Sources */,
 				502D99742BD99FBE00665F9D /* GalleryViewModel.swift in Sources */,

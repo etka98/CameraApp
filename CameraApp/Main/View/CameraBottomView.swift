@@ -30,8 +30,6 @@ protocol CameraBottomDelegate: AnyObject {
 
 final class CameraBottomView: UIView {
     
-    weak var delegate: CameraBottomDelegate?
-    
     private enum Constant {
         
         static let recordButtonSize = CGSize(width: 100, height: 100)
@@ -42,6 +40,12 @@ final class CameraBottomView: UIView {
         static let settingsButtonImageName = "gearshape.fill"
         static let galleryButtonImageName = "tray.and.arrow.up.fill"
     }
+    
+    /// Delegate owner.
+    weak var delegate: CameraBottomDelegate?
+    
+    /// Boolean value indicating whether is recording.
+    var isRecording = false
     
     private let stackView: UIStackView = {
         let stackView = UIStackView()
@@ -85,8 +89,6 @@ final class CameraBottomView: UIView {
         
         return button
     }()
-    
-    private var isRecording = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)

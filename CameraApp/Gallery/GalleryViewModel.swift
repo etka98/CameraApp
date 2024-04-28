@@ -20,21 +20,24 @@ final class GalleryViewState {
 
 final class GalleryViewModel {
     
-    /// Boolean value indicating whether currently in editing state.
-    var isEditing = false
-    
-    /// Closure for given state.
-    var stateChangeHandler: ((GalleryViewState.Change) -> Void)? {
-        get { state.onChange }
-        set { state.onChange = newValue }
-    }
-    
     private enum Constant {
         
         static let sizeUnits = ["KB", "MB", "GB", "TB"]
         static let sizeFormat = "%.2f %@"
         static let defaultUnit = "Byte"
         static let unitSize = 1000.0
+    }
+    
+    /// Boolean value indicating whether currently in editing state.
+    var isEditing = false
+    
+    /// Double value indicating time elapsed during session in seconds.
+    var elapsedTime: Double?
+    
+    /// Closure for given state.
+    var stateChangeHandler: ((GalleryViewState.Change) -> Void)? {
+        get { state.onChange }
+        set { state.onChange = newValue }
     }
     
     private let state = GalleryViewState()

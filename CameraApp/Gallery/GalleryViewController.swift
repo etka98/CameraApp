@@ -7,6 +7,15 @@
 
 import UIKit
 
+protocol GalleryViewControllerDelegate: AnyObject {
+
+    /// Notfies whether session completed.
+    ///  - Parameters:
+    ///     - viewController: Delegate owner.
+    ///     - didCompleteSession: Boolean value indicating whether session completed.
+    func galleryViewController(_ viewController: GalleryViewController, didCompleteSession: Bool)
+}
+
 final class GalleryViewController: BaseViewController {
     
     private enum Constant {
@@ -18,6 +27,7 @@ final class GalleryViewController: BaseViewController {
         static let cornerRadius = 12.0
         static let buttonMargins = UIEdgeInsets(top: 12, left: 12, bottom: 0, right: 12)
         static let buttonHeight = 50.0
+        static let emptyString = ""
     }
     
     // TODO: Localization
@@ -27,11 +37,17 @@ final class GalleryViewController: BaseViewController {
         static let editButtonTitle = "Edit"
         static let doneButtonTitle = "Done"
         static let infoButtonTitle = "Info"
-        static let infoMessage = "Capture Size: %@ \n Image Count: %d"
+        static let infoMessage = "Capture duration: %.2f seconds \n Capture Size: %@ \n Image Count: %d"
         static let infoTitle = "Information"
         static let okayButtonTitle = "OK"
         static let completeButtonTitle = "Complete"
     }
+    
+    /// View model.
+    var viewModel: GalleryViewModel?
+    
+    /// Delegate owner.
+    weak var delegate: GalleryViewControllerDelegate?
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -77,8 +93,6 @@ final class GalleryViewController: BaseViewController {
         target: self,
         action: #selector(deleteButtonTapped))
     
-    private let viewModel = GalleryViewModel()
-    
     private var cellSize: CGFloat {
         return (view.frame.width - Constant.rowSpacing) / Constant.rowSize
     }
@@ -88,7 +102,7 @@ final class GalleryViewController: BaseViewController {
         
         setup()
         bindViewModel()
-        viewModel.loadImages()
+        viewModel?.loadImages()
     }
 }
 
@@ -97,7 +111,7 @@ final class GalleryViewController: BaseViewController {
 extension GalleryViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard !viewModel.isEditing else {
+        guard !(viewModel?.isEditing ?? false) else {
             return
         }
         
@@ -124,7 +138,7 @@ extension GalleryViewController: UICollectionViewDataSource {
         }
         
         let image = UIImage(contentsOfFile: StoredImageManager.shared.imageURLs[indexPath.item].path)
-        cell.configure(image: image, isEditing: viewModel.isEditing)
+        cell.configure(image: image, isEditing: viewModel?.isEditing ?? false)
         
         return cell
     }
@@ -178,8 +192,8 @@ private extension GalleryViewController {
     
     @objc
     private func editButtonTapped() {
-        viewModel.isEditing.toggle()
-        collectionView.allowsMultipleSelection = viewModel.isEditing
+        viewModel?.isEditing.toggle()
+        collectionView.allowsMultipleSelection = viewModel?.isEditing ?? false
         adjustNavigationRightButtons()
         collectionView.reloadData()
     }
@@ -193,7 +207,7 @@ private extension GalleryViewController {
         let sortedIndexPaths = indexPaths.sorted(by: { $0.item > $1.item })
         
         for indexPath in sortedIndexPaths {
-            viewModel.deleteImage(at: indexPath.item)
+            viewModel?.deleteImage(at: indexPath.item)
             StoredImageManager.shared.imageURLs.remove(at: indexPath.item)
         }
         
@@ -206,7 +220,8 @@ private extension GalleryViewController {
     private func infoButtonTapped() {
         let message = String(
             format: Localization.infoMessage,
-            viewModel.calculateSizeOfFile(),
+            viewModel?.elapsedTime ?? .zero,
+            viewModel?.calculateSizeOfFile() ?? Constant.emptyString,
             StoredImageManager.shared.imageURLs.count)
         let alert = UIAlertController(
             title: Localization.infoTitle,
@@ -220,7 +235,8 @@ private extension GalleryViewController {
     
     @objc
     private func completeButtonTapped() {
-        viewModel.deleteAllImages()
+        viewModel?.deleteAllImages()
+        delegate?.galleryViewController(self, didCompleteSession: true)
         navigationController?.popViewController(animated: true)
     }
 }
@@ -230,11 +246,11 @@ private extension GalleryViewController {
 private extension GalleryViewController {
     
     private func adjustNavigationRightButtons() {
-        navigationItem.rightBarButtonItems?[Constant.editButtonIndex].title = !viewModel.isEditing
+        navigationItem.rightBarButtonItems?[Constant.editButtonIndex].title = !(viewModel?.isEditing ?? false)
         ? Localization.editButtonTitle
         : Localization.doneButtonTitle
         
-        if viewModel.isEditing {
+        if viewModel?.isEditing ?? false {
             navigationItem.rightBarButtonItems?.append(deleteBarButtonItem)
         } else {
             navigationItem.rightBarButtonItems?.removeLast()
@@ -247,7 +263,7 @@ private extension GalleryViewController {
 private extension GalleryViewController {
     
     private func bindViewModel() {
-        viewModel.stateChangeHandler = { [weak self] change in
+        viewModel?.stateChangeHandler = { [weak self] change in
             guard let self else {
                 return
             }

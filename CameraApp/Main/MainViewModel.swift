@@ -14,7 +14,6 @@ final class MainViewState {
         
         case authorizedCamera
         case noCameraAccess
-        case imageCaptured(Data)
         case error(Error?)
     }
     
@@ -30,8 +29,8 @@ final class MainViewModel: NSObject {
         static let preferredTimescale: CMTimeScale = 1000000
     }
     
-    /// Data representing last captured image.
-    var lastImageData: Data?
+    /// List of image data that has not been stored.
+    var imageDataList: [Data] = []
     
     /// Capture session.
     var captureSession: AVCaptureSession?
@@ -155,8 +154,7 @@ extension MainViewModel: AVCapturePhotoCaptureDelegate {
             return
         }
         
-        lastImageData = imageData
-        state.onChange?(.imageCaptured(imageData))
+        imageDataList.append(imageData)
     }
 }
 

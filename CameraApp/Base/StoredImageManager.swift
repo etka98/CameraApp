@@ -86,4 +86,36 @@ class StoredImageManager: NSObject {
         
         return totalFileSize
     }
+    
+    /// Saves given image data items to local data stroge.
+    ///  - Parameters:
+    ///     - imageDataList: List of image data to be stored.
+    ///     - completion: The callback called after storing is complete.
+    func saveImagesToLocalStroge(imageDataList: [Data?], completion: () -> Void) {
+        for data in imageDataList {
+            saveImageToLocalStorage(imageData: data)
+        }
+        completion()
+    }
+    
+    @discardableResult
+    private func saveImageToLocalStorage(imageData: Data?, fileExtension: String = "jpg") -> Bool {
+        guard let imageData else {
+            return false
+        }
+        
+        let fileManager = FileManager.default
+        guard let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            return false
+        }
+        let fileName = String(format: "%@.%@", UUID().uuidString, fileExtension)
+        let fileURL = documentsDirectory.appendingPathComponent(fileName)
+
+        do {
+            try imageData.write(to: fileURL)
+            return true
+        } catch {
+            return false
+        }
+    }
 }

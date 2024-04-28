@@ -99,13 +99,10 @@ extension MainViewController: CameraBottomDelegate {
     
     func cameraBottomView(_ view: CameraBottomView, galleryButtonTapped: UIButton) {
         pauseSession()
-        
-        let galleryViewController = GalleryViewController()
-        let galleryViewModel = GalleryViewModel()
-        galleryViewModel.elapsedTime = viewModel.elapsedTime
-        galleryViewController.viewModel = galleryViewModel
-        galleryViewController.delegate = self
-        navigationController?.pushViewController(galleryViewController, animated: true)
+        StoredImageManager.shared.saveImagesToLocalStroge(imageDataList: viewModel.imageDataList) {
+            viewModel.imageDataList.removeAll()
+            routeToGallery()
+        }
     }
     
     func cameraBottomView(_ view: CameraBottomView, settingsButtonTapped: UIButton) {
@@ -159,7 +156,9 @@ private extension MainViewController {
             bottomView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             view.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor),
             view.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor),
-            lastImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: Constant.imagePreviewWidthRatio)
+            lastImageView.widthAnchor.constraint(
+                equalTo: view.widthAnchor,
+                multiplier: Constant.imagePreviewWidthRatio)
         ])
     }
 }
@@ -169,10 +168,11 @@ private extension MainViewController {
 private extension MainViewController {
     
     private func setLastCapturedImage() {
-        guard let imageData = viewModel.lastImageData,
+        guard let imageData = viewModel.imageDataList.last,
               let image = UIImage(data: imageData) else {
             return
         }
+        
         lastImageView.image = image
         let ratio = (image.size.height) / (image.size.width)
         lastImageView.heightAnchor.constraint(equalTo: lastImageView.widthAnchor,
@@ -190,6 +190,15 @@ private extension MainViewController {
         bottomView.stopRecording()
         toggleLastImageView(isHidden: false)
         setLastCapturedImage()
+    }
+    
+    private func routeToGallery() {
+        let galleryViewController = GalleryViewController()
+        let galleryViewModel = GalleryViewModel()
+        galleryViewModel.elapsedTime = viewModel.elapsedTime
+        galleryViewController.viewModel = galleryViewModel
+        galleryViewController.delegate = self
+        navigationController?.pushViewController(galleryViewController, animated: true)
     }
 }
 
@@ -219,15 +228,8 @@ private extension MainViewController {
             }
         case .noCameraAccess:
             createAlertForError(message: Localization.noCameraAccessMessage)
-        case .imageCaptured(let imageData):
-            DispatchQueue.global(qos: .background).async {
-                guard let image = UIImage(data: imageData) else {
-                    return
-                }
-                
-                image.saveToLocalStorage()
-            }
         case .error(let error):
+            pauseSession()
             createAlertForError(message: error?.localizedDescription)
         }
     }

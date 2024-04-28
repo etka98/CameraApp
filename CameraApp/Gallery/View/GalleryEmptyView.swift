@@ -36,6 +36,7 @@ class GalleryEmptyView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = Localization.emptyViewText
         label.textAlignment = .center
+        label.textColor = .white
         
         return label
     }()

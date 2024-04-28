@@ -63,6 +63,14 @@ final class GalleryViewController: BaseViewController {
         return button
     }()
     
+    private let emptyView: GalleryEmptyView = {
+        let emptyView = GalleryEmptyView()
+        emptyView.translatesAutoresizingMaskIntoConstraints = false
+        emptyView.isHidden = true
+        
+        return emptyView
+    }()
+    
     private lazy var deleteBarButtonItem = UIBarButtonItem(
         title: Localization.deleteButtonTitle,
         style: .plain,
@@ -79,6 +87,7 @@ final class GalleryViewController: BaseViewController {
         super.viewDidLoad()
         
         setup()
+        bindViewModel()
         viewModel.loadImages()
     }
 }
@@ -147,6 +156,7 @@ private extension GalleryViewController {
     private func setupConstraints() {
         view.addSubview(collectionView)
         view.addSubview(completeButton)
+        view.addSubview(emptyView)
         
         completeButton.set(width: nil, height: Constant.buttonHeight)
         NSLayoutConstraint.activate([
@@ -158,6 +168,7 @@ private extension GalleryViewController {
             view.trailingAnchor.constraint(equalTo: completeButton.trailingAnchor, constant: Constant.buttonMargins.right),
             view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: completeButton.bottomAnchor)
         ])
+        emptyView.dock(superview: view.safeAreaLayoutGuide)
     }
 }
 
@@ -248,6 +259,11 @@ private extension GalleryViewController {
     private func applyStateChange(_ change: GalleryViewState.Change) {
         switch change {
         case .retrievedImageURLs:
+            guard !StoredImageManager.shared.imageURLs.isEmpty else {
+                emptyView.isHidden = false
+                return
+            }
+            
             collectionView.reloadData()
         case .error(let error):
             createAlertForError(message: error?.localizedDescription)
